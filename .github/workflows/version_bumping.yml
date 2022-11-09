@@ -5,7 +5,7 @@ on:
     # closed (merged) event because github token doesn't have write permission
     # for pull_request from fork repository.
     branches:
-      - master
+      - main
     tags:
       - 'v*.*.*'
   pull_request:
@@ -53,11 +53,11 @@ jobs:
           draft: false
           prerelease: false
 
-  release-check:
-    if: github.event.action == 'labeled'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      # Post bumpr status comment
-      - name: haya14busa/action-bumpr
-        uses: ./
+  # release-check:
+  #   if: github.event.action == 'labeled'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     # Post bumpr status comment
+  #     - name: haya14busa/action-bumpr
+  #       uses: ./
