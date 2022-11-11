@@ -18,7 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: main
+          # ref: ${{ github.event.pull_request.head.ref }}
 
 
       # Bump version on merging Pull Requests with specific labels.
