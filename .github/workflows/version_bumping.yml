@@ -25,7 +25,7 @@ jobs:
       # (bump:major,bump:minor,bump:patch)
       - id: bumpr
         if: "!startsWith(github.ref, 'refs/tags/')"
-        uses: jbcrowe/action-bumpr@master
+        uses: jbcrowe/action-bumpr@v1
 
 
       # Update corresponding major and minor tag.
