@@ -1,15 +1,12 @@
-name: release
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     types:
-#       - labeled
+name: Label Checker
 on:
   pull_request:
-   types: [closed, labeled]
-  push: { branches: [master] }
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
 
 jobs:
   release:
@@ -27,7 +24,6 @@ jobs:
       - id: bumpr
         if: "!startsWith(github.ref, 'refs/tags/')"
         uses: haya14busa/action-bumpr@v1
-
 
 
       # Update corresponding major and minor tag.
