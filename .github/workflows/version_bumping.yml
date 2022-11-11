@@ -8,12 +8,12 @@ name: release
 #       - labeled
 on:
   pull_request:
-   types: [closed]
-
+   types: [closed, labeled]
+  push: { branches: [master] }
 
 jobs:
   release:
-    # if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
       # (bump:major,bump:minor,bump:patch)
       - id: bumpr
         if: "!startsWith(github.ref, 'refs/tags/')"
-        uses: j-crowe/action-bumpr@v1
+        uses: haya14busa/action-bumpr@v1
 
 
 
@@ -38,10 +38,3 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           tag: ${{ steps.bumpr.outputs.next_version }}
-  # release-check:
-  #   if: github.event.action == 'labeled'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Post bumpr status comment
-  #       uses: haya14busa/action-bumpr@v1
