@@ -1,19 +1,19 @@
 name: release
-# on:
-#   push:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - master
 #   pull_request:
 #     types:
 #       - labeled
-on:
-  pull_request:
-   types: [closed]
+# on:
+#   pull_request:
+#    types: [closed]
 
 
 jobs:
   release:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    # if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
       # (bump:major,bump:minor,bump:patch)
       - id: bumpr
         if: "!startsWith(github.ref, 'refs/tags/')"
-        uses: jbcrowe/action-bumpr@v1
+        uses: j-crowe/action-bumpr@v1
 
 
       # Update corresponding major and minor tag.
