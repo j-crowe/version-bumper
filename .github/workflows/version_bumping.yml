@@ -1,19 +1,17 @@
-name: Automatic Version Bumping
+name: Automated Version Bumping
 on:
   pull_request:
    types: [closed, labeled]
-  push: { branches: [master] }
+  push: { branches: [main] }
 
 jobs:
-  release:
+  bump:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           ref: main
-          # ref: ${{ github.event.pull_request.head.ref }}
-
 
       # Bump version on merging Pull Requests with specific labels.
       # (bump:major,bump:minor,bump:patch)
@@ -21,13 +19,10 @@ jobs:
         if: "!startsWith(github.ref, 'refs/tags/')"
         uses: haya14busa/action-bumpr@v1
 
-
-
       # Update corresponding major and minor tag.
       # e.g. Update v1 and v1.2 when releasing v1.2.3
       - uses: haya14busa/action-update-semver@v1
         if: "!steps.bumpr.outputs.skip"
-        # if: "steps.tag.outputs.value != ''"
         with:
           github_token: ${{ secrets.github_token }}
           tag: ${{ steps.bumpr.outputs.next_version }}
