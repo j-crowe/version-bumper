@@ -60,6 +60,7 @@ workflows:
       # Only run when the github action event is a release
       # equal: [ "release", << pipeline.parameters.GHA_Event >> ]
 
+
     jobs:
       - release:
           filters:
