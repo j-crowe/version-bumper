@@ -24,7 +24,7 @@ jobs:
   release:
     docker:
       - image: cimg/base:stable
-    working_directory: ~
+    # working_directory: ~
     steps:
       - checkout
       - run:
@@ -56,7 +56,7 @@ jobs:
 
 workflows:
   build_and_release:
-    when:
+    # when:
       # Only run when the github action event is a release
       # equal: [ "release", << pipeline.parameters.GHA_Event >> ]
 
@@ -66,4 +66,3 @@ workflows:
           filters:
             branches:
               only: main
-
