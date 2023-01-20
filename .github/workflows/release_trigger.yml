@@ -5,10 +5,14 @@ jobs:
   trigger-circleci:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Environment (Push)
+        shell: bash
+        run: |
+          echo "LAST_COMMIT_SHA=${GITHUB_SHA}" >> ${GITHUB_ENV}
       - name: Release Trigger
         id: gha_release_trigger
         uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0
         with:
-          GHA_Meta: ${{ github.sha }}
+          GHA_Meta: "${{ github.sha }}"
         env:
           CCI_TOKEN: ${{ secrets.CCI_TOKEN }}
