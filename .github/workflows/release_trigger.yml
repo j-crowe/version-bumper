@@ -9,6 +9,7 @@ jobs:
         shell: bash
         run: |
           echo "LAST_COMMIT_SHA=${GITHUB_SHA}" >> ${GITHUB_ENV}
+
       - name: Release Trigger
         id: gha_release_trigger
         uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0
