@@ -12,7 +12,7 @@ jobs:
 
       - name: Release Trigger
         id: gha_release_trigger
-        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0
+        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0.6
         with:
           GHA_Meta: "${{ github.sha }}"
         env:
